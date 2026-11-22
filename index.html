@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Nur Tasbeh — Mastura uchun🤍</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="toast" id="toast">33 ta to‘ldi!</div>
+
+  <div class="app-shell">
+
+    <!-- 1-BO'LIM: BOSH SAHIFA -->
+    <section class="screen active" id="screen-home">
+      <header class="header">
+        <div>
+          <div class="dedication-badge">✦ Mastura uchun🤍 • Nur Tasbeh</div>
+          <p class="subtitle">Assalomu alaykum</p>
+          <h1 class="title">Nur Tasbeh</h1>
+        </div>
+        <button class="icon-btn" id="openCustomModalBtn" title="Yangi zikr qo‘shish">＋</button>
+      </header>
+
+      <div class="hero-card">
+        <div class="hero-info">
+          <span class="pill">Bugungi maqsad</span>
+          <h2 class="hero-count"><span id="homeTodayCount">0</span> / <span id="homeDailyGoal">100</span></h2>
+          <p class="hero-desc" id="homeGoalStatus">Kunlik zikr rejangizni davom ettiring</p>
+          <button class="primary-btn" id="startTasbihBtn">Tasbehni boshlash →</button>
+        </div>
+        <div class="ring-wrap">
+          <svg class="progress-ring" viewBox="0 0 100 100">
+            <circle class="ring-bg" cx="50" cy="50" r="40"></circle>
+            <circle class="ring-fill" id="dailyRing" cx="50" cy="50" r="40"></circle>
+          </svg>
+          <span class="ring-percent" id="dailyPercent">0%</span>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3>Bo‘limlar</h3>
+      </div>
+      <div class="quick-grid">
+        <div class="feature-card" data-go="tasbih">
+          <div class="f-icon">📿</div>
+          <h4>Jonli Tasbeh</h4>
+          <p>33 talik rang o‘zgaruvchi yog‘och tasbeh</p>
+        </div>
+        <div class="feature-card" data-go="zikrlar">
+          <div class="f-icon">📖</div>
+          <h4>Zikrlar</h4>
+          <p>Tonggi, kechki va namozdan keyingi zikrlar</p>
+        </div>
+        <div class="feature-card" data-go="stats">
+          <div class="f-icon">📊</div>
+          <h4>Statistika</h4>
+          <p>Kunlik natijalar va sozlamalar</p>
+        </div>
+        <div class="feature-card" id="quickCustomCard">
+          <div class="f-icon">✍️</div>
+          <h4>Shaxsiy zikr</h4>
+          <p>O‘zingiz xohlagan zikr va maqsad kiriting</p>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3>Hozirgi zikr</h3>
+      </div>
+      <div class="current-zikr-banner" data-go="tasbih">
+        <div>
+          <div class="cz-uz" id="homeCurrentUz">SubhanAllah</div>
+          <div class="cz-sub" id="homeCurrentCycle">0 / 33</div>
+        </div>
+        <div class="cz-ar" id="homeCurrentAr">سُبْحَانَ اللَّهِ</div>
+      </div>
+    </section>
+
+    <!-- 2-BO'LIM: JONLI TASBEH -->
+    <section class="screen" id="screen-tasbih">
+      <div class="tasbih-top">
+        <button class="badge-btn" data-go="home">← Bosh sahifa</button>
+        <div class="badge" id="totalBadge">Jami: 0</div>
+        <button class="badge-btn" id="targetToggleBtn">Maqsad: 33</button>
+      </div>
+
+      <div class="stage" id="tapArea">
+        <svg id="tasbihSvg" viewBox="0 0 360 600" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="beadGrad" cx="35%" cy="30%" r="68%">
+              <stop offset="0%" id="stopLight" stop-color="#dfb17e" />
+              <stop offset="55%" id="stopMid" stop-color="#9c6635" />
+              <stop offset="100%" id="stopDark" stop-color="#4e2f14" />
+            </radialGradient>
+            <filter id="beadShadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="3" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.25" />
+            </filter>
+          </defs>
+
+          <path id="cordPath"
+                d="M 45,30 C 295,60 305,520 55,570"
+                fill="none"
+                stroke="#4a3525"
+                stroke-width="3.5"
+                stroke-linecap="round" />
+
+          <path d="M 55,80 C 235,110 240,470 65,515"
+                fill="none"
+                stroke="currentColor"
+                stroke-opacity="0.14"
+                stroke-width="1.2" />
+
+          <g id="beadsGroup" filter="url(#beadShadow)"></g>
+        </svg>
+
+        <div class="counter-box">
+          <div class="stage-label" id="stageLabel">1-bosqich</div>
+          <div class="cycle-count" id="cycleCount">0</div>
+          <div class="zikr-ar" id="zikrAr">سُبْحَانَ اللَّهِ</div>
+          <div class="zikr-uz" id="zikrUz">SubhanAllah</div>
+          <div class="hint">Donani yoki ekranni bosing</div>
+        </div>
+      </div>
+
+      <div class="tasbih-actions">
+        <button class="action-btn" id="resetCycleBtn">↺ Nolga tushirish</button>
+        <button class="action-btn" id="soundBtn">🔊 Ovoz: Yoqilgan</button>
+      </div>
+    </section>
+
+    <!-- 3-BO'LIM: ZIKRLAR TO'PLAMI -->
+    <section class="screen" id="screen-zikrlar">
+      <header class="header">
+        <div>
+          <p class="subtitle">Tanlang va sanang</p>
+          <h1 class="title">Zikrlar to‘plami</h1>
+        </div>
+        <button class="icon-btn" id="addZikrFromListBtn">＋</button>
+      </header>
+
+      <div class="filter-tabs" id="categoryTabs">
+        <button class="tab active" data-cat="all">Barchasi</button>
+        <button class="tab" data-cat="namoz">Namozdan keyin</button>
+        <button class="tab" data-cat="kundalik">Kundalik</button>
+        <button class="tab" data-cat="custom">Shaxsiy</button>
+      </div>
+
+      <div class="zikr-list" id="zikrListContainer"></div>
+    </section>
+
+    <!-- 4-BO'LIM: STATISTIKA VA SOZLAMALAR -->
+    <section class="screen" id="screen-stats">
+      <header class="header">
+        <div>
+          <p class="subtitle">Natijalar va boshqaruv</p>
+          <h1 class="title">Statistika</h1>
+        </div>
+      </header>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-num" id="statToday">0</span>
+          <span class="stat-lbl">Bugungi zikrlar</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" id="statTotal">0</span>
+          <span class="stat-lbl">Umumiy zikrlar</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" id="statCycles">0</span>
+          <span class="stat-lbl">To‘liq 33 talik</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" id="statStreak">1 kun</span>
+          <span class="stat-lbl">Faollik</span>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3>Sozlamalar</h3>
+
+        <div class="setting-row">
+          <div>
+            <strong>Kunlik zikr maqsadi</strong>
+            <p>Bosh sahifadagi halqa uchun</p>
+          </div>
+          <select id="dailyGoalSelect">
+            <option value="100">100 ta</option>
+            <option value="300">300 ta</option>
+            <option value="500">500 ta</option>
+            <option value="1000">1000 ta</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Yog‘och ovozi</strong>
+            <p>Har bir dona tushganda tovush</p>
+          </div>
+          <input type="checkbox" id="soundCheckbox" checked />
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Tebranish (Vibratsiya)</strong>
+            <p>Telefonda yengil sezish effekti</p>
+          </div>
+          <input type="checkbox" id="vibeCheckbox" checked />
+        </div>
+
+        <button class="danger-btn" id="clearAllDataBtn">Barcha statistikani tozalash</button>
+      </div>
+    </section>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-go="home">
+        <span class="nav-ico">🏠</span>
+        <span>Asosiy</span>
+      </button>
+      <button class="nav-item" data-go="tasbih">
+        <span class="nav-ico">📿</span>
+        <span>Tasbeh</span>
+      </button>
+      <button class="nav-item" data-go="zikrlar">
+        <span class="nav-ico">📖</span>
+        <span>Zikrlar</span>
+      </button>
+      <button class="nav-item" data-go="stats">
+        <span class="nav-ico">📊</span>
+        <span>Statistika</span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop" id="customModal">
+    <div class="modal-card">
+      <h3>Yangi zikr qo‘shish</h3>
+      <label>Zikr nomi (Lotincha)</label>
+      <input type="text" id="customUzInput" placeholder="Masalan: Astag‘firulloh" />
+
+      <label>Arabcha matni (ixtiyoriy)</label>
+      <input type="text" id="customArInput" placeholder="أَسْتَغْفِرُ اللَّهَ" />
+
+      <label>Ma’nosi / Tarjimasi</label>
+      <input type="text" id="customMeaningInput" placeholder="Allohdan mag‘firat so‘rayman" />
+
+      <label>Maqsad soni</label>
+      <select id="customTargetInput">
+        <option value="33">33 ta</option>
+        <option value="99">99 ta</option>
+        <option value="100">100 ta</option>
+      </select>
+
+      <div class="modal-btns">
+        <button class="action-btn" id="closeModalBtn">Bekor qilish</button>
+        <button class="primary-btn" id="saveCustomZikrBtn">Saqlash va boshlash</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
